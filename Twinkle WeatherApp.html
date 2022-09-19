@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="D:\Twinkle-Weather-App\Styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-app">
+        <form class="box">
+          <div class="row">
+            <div class="col-6">
+              <input
+                type="search"
+                placeholder="Type a city name..."
+                autofocus="off"
+                autocomplete="off"
+                class="form-control shadow-sm"
+                id="place"
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="submit"
+                value="Search"
+                class="form-control btn btn-primary shadow-sm"
+              />
+            </div>
+            <div class="col-3">
+              <button id="location">Current</button>
+            </div>
+          </div>
+        </form>
+        <div>
+          <h1 class="city">Sydney</h1>
+          <ul class="date-con">
+            <li id="dayAndTime">Wednesday 22:00</li>
+            <li id="status">partly Cloudy</li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-2">
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+              alt="Cloudy icon"
+              class="weather-icon"
+            />
+          </div>
+          <div class="col-3">
+            <span class="temperature">19</span
+            ><span class="units"><a id="celsius"> °C </a> </span>
+          </div>
+          <div class="col-4">
+            <ul class="details">
+              <li id="pressure">Pressure:</li>
+              <li id="humidity">Humidity:</li>
+              <li id="wind">Wind:</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="D:\Twinkle-Weather-App\Twinklejs.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+.weather-app {
+  max-width: 50%;
+  margin: 10px auto;
+  padding: 15px;
+  border: 1px solid rgb(223, 222, 222);
+  border-radius: 10px;
+}
+.city {
+  font-size: 25px;
+  font-family: sans-serif;
+  color: rgb(103, 103, 103);
+  padding: 10px 0px 0px 0px;
+}
+
+.date-con {
+  color: rgb(103, 103, 103);
+  font-size: 15px;
+  list-style-type: none;
+  padding: 0px;
+  font-family: sans-serif;
+  margin: 0;
+}
+.temperature {
+  font-size: 60px;
+}
+.units {
+  position: relative;
+  top: -30px;
+}
+.details {
+  padding: 15px 0px 0px 30px;
+  margin: 0px;
+  list-style: none;
+  border: 0;
+  color: rgb(103, 103, 103);
+}
+.weather-icon {
+  width: 60px;
+  height: 75px;
+  padding: 15px 0px 0px 0px;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(27, 14, 27);
+}
+#location {
+  padding: 7px 30px;
+  background-color: rgb(10, 36, 85);
+  color: #fff;
+  border: 0px;
+  border-radius: 5px;
+}
