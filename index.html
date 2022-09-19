@@ -11,6 +11,65 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="D:\Twinkle-Weather-App\Styles.css" />
+    <style>
+      .weather-app {
+        max-width: 50%;
+        margin: 10px auto;
+        padding: 15px;
+        border: 1px solid rgb(223, 222, 222);
+        border-radius: 10px;
+      }
+      .city {
+        font-size: 25px;
+        font-family: sans-serif;
+        color: rgb(103, 103, 103);
+        padding: 10px 0px 0px 0px;
+      }
+
+      .date-con {
+        color: rgb(103, 103, 103);
+        font-size: 15px;
+        list-style-type: none;
+        padding: 0px;
+        font-family: sans-serif;
+        margin: 0;
+      }
+      .temperature {
+        font-size: 60px;
+      }
+      .units {
+        position: relative;
+        top: -30px;
+      }
+      .details {
+        padding: 15px 0px 0px 30px;
+        margin: 0px;
+        list-style: none;
+        border: 0;
+        color: rgb(103, 103, 103);
+      }
+      .weather-icon {
+        width: 60px;
+        height: 75px;
+        padding: 15px 0px 0px 0px;
+      }
+      a {
+        text-decoration: none;
+      }
+      a:hover {
+        color: rgb(27, 14, 27);
+      }
+      #location {
+        padding: 7px 30px;
+        background-color: rgb(10, 36, 85);
+        color: #fff;
+        border: 0px;
+        border-radius: 5px;
+      }
+      p {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -73,6 +132,84 @@
         >My GitHub Repository link</a
       >
     </p>
-    <script src="D:\Twinkle-Weather-App\Twinklejs.js"></script>
+    <script>
+      let today = new Date();
+      let day = today.getDay();
+      let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let timeInHours = today.getHours();
+      let timeInMinutes = today.getMinutes();
+      let dayAndTime = document.querySelector("#dayAndTime");
+      if (timeInHours < 10) {
+        dayAndTime.innerHTML = `${days[day]} 0${timeInHours}:${timeInMinutes}`;
+      } else {
+        dayAndTime.innerHTML = `${days[day]} ${timeInHours}:${timeInMinutes}`;
+      }
+      if (timeInMinutes < 10) {
+        dayAndTime.innerHTML = `${days[day]} ${timeInHours}:0${timeInMinutes}`;
+      } else {
+        dayAndTime.innerHTML = `${days[day]} ${timeInHours}:${timeInMinutes}`;
+      }
+      //
+      function showPlace(response) {
+        console.log(response.data);
+        let placeDescription = response.data.weather[0].description;
+        let cityName = response.data.name;
+        let humidity = response.data.main.humidity;
+        let wind = response.data.wind.speed;
+        let pressure = response.data.main.pressure;
+        let cityText = document.querySelector(".city");
+        cityText.innerHTML = cityName;
+        let humidityText = document.querySelector("#humidity");
+        humidityText.innerHTML = `Humidity: ${humidity}%`;
+        let pressureText = document.querySelector("#pressure");
+        pressureText.innerHTML = `Pressure: ${pressure}`;
+        let windText = document.querySelector("#wind");
+        windText.innerHTML = `Wind: ${wind} Km/h`;
+        let description = document.querySelector("#status");
+        description.innerHTML = placeDescription;
+        let temperature = response.data.main.temp;
+        let tempText = document.querySelector(".temperature");
+        tempText.innerHTML = Math.round(temperature);
+      }
+      function weather(place) {
+        console.log(place);
+        let apiKey = "86e5936d48065a1715f44996856cb061";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(showPlace);
+      }
+      function placeText(event) {
+        event.preventDefault();
+        let text = document.querySelector("#place");
+        placeName = text.value.trim().toLowerCase();
+        if (placeName == 0) {
+          alert("Please enter the City name");
+        } else {
+          weather(placeName);
+        }
+      }
+      let place = document.querySelector(".btn");
+      place.addEventListener("click", placeText);
+      function searchPosition(position) {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+        let apiKey = "86e5936d48065a1715f44996856cb061";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(showPlace);
+      }
+      function showLocation(event) {
+        event.preventDefault();
+        let position = navigator.geolocation.getCurrentPosition(searchPosition);
+      }
+      let currentLocation = document.querySelector("#location");
+      currentLocation.addEventListener("click", showLocation);
+    </script>
   </body>
 </html>
